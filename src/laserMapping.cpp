@@ -121,7 +121,7 @@ V3F XAxisPoint_body(LIDAR_SP_LEN, 0.0, 0.0);
 V3F XAxisPoint_world(LIDAR_SP_LEN, 0.0, 0.0);
 V3D euler_cur;
 V3D position_last(Zero3d);
-V3D Lidar_T_wrt_IMU(Zero3d);
+V3D Lidar_T_wrt_IMU(Zero3d);    // vector3d
 M3D Lidar_R_wrt_IMU(Eye3d);
 
 /*** EKF inputs and output ***/
@@ -800,8 +800,8 @@ int main(int argc, char** argv)
 
     memset(point_selected_surf, true, sizeof(point_selected_surf));
     memset(res_last, -1000.0f, sizeof(res_last));
-    downSizeFilterSurf.setLeafSize(filter_size_surf_min, filter_size_surf_min, filter_size_surf_min);
-    downSizeFilterMap.setLeafSize(filter_size_map_min, filter_size_map_min, filter_size_map_min);
+    downSizeFilterSurf.setLeafSize(filter_size_surf_min, filter_size_surf_min, filter_size_surf_min);   // downsampling surface pointcloud
+    downSizeFilterMap.setLeafSize(filter_size_map_min, filter_size_map_min, filter_size_map_min);   // downsampling map pointcloud
     memset(point_selected_surf, true, sizeof(point_selected_surf));
     memset(res_last, -1000.0f, sizeof(res_last));
 
