@@ -288,7 +288,8 @@ void ImuProcess::UndistortPcl(const MeasureGroup &meas, esekfom::esekf<state_ikf
   }
 
   /*** calculated the pos and attitude prediction at the frame-end ***/
-  double note = pcl_end_time > imu_end_time ? 1.0 : -1.0;
+  double note = pcl_end_time > imu_end_time ? 1.0 : -1.0; // always 1.0
+  std::cout << note << std::endl;
   dt = note * (pcl_end_time - imu_end_time);
   kf_state.predict(dt, Q, in);
   

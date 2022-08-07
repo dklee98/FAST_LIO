@@ -173,7 +173,7 @@ void pointBodyToWorld_ikfom(PointType const * const pi, PointType * const po, st
 }
 
 
-void pointBodyToWorld(PointType const * const pi, PointType * const po)
+void pointBodyToWorld(PointType const * const pi, PointType * const po) //
 {
     V3D p_body(pi->x, pi->y, pi->z);
     V3D p_global(state_point.rot * (state_point.offset_R_L_I*p_body + state_point.offset_T_L_I) + state_point.pos);
@@ -807,7 +807,7 @@ int main(int argc, char** argv)
 
     Lidar_T_wrt_IMU<<VEC_FROM_ARRAY(extrinT);
     Lidar_R_wrt_IMU<<MAT_FROM_ARRAY(extrinR);
-    p_imu->set_extrinsic(Lidar_T_wrt_IMU, Lidar_R_wrt_IMU);
+    p_imu->set_extrinsic(Lidar_T_wrt_IMU, Lidar_R_wrt_IMU); // p_imu : IMUPROCESS object
     p_imu->set_gyr_cov(V3D(gyr_cov, gyr_cov, gyr_cov));
     p_imu->set_acc_cov(V3D(acc_cov, acc_cov, acc_cov));
     p_imu->set_gyr_bias_cov(V3D(b_gyr_cov, b_gyr_cov, b_gyr_cov));
@@ -815,6 +815,7 @@ int main(int argc, char** argv)
 
     double epsi[23] = {0.001};
     fill(epsi, epsi+23, 0.001);
+    //// esekfom::esekf<state_ikfom, 12, input_ikfom> kf;
     kf.init_dyn_share(get_f, df_dx, df_dw, h_share_model, NUM_MAX_ITERATIONS, epsi);
 
     /*** debug record ***/
